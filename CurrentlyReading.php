@@ -4,7 +4,7 @@
     Plugin URI: http://www.damn.org.za/blog/CurrentlyReading
     Description: Display a Currently Reading widget using an image from (and linking to) the Google Books Website
     Author: Eugéne Roux
-    Version: 2
+    Version: 3
     Author URI: http://damn.org.za/
  */
 
