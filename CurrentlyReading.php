@@ -21,40 +21,6 @@ class CurrentlyReading extends WP_Widget {
         );
     }
 
-/*
-
-    function shailan_SubpagesWidget() {
-		$widget_ops = array('classname' => 'shailan_SubpagesWidget', 'description' => __( 'Subpages list', 'subpages-extended' ) );
-		$this->WP_Widget('shailan-subpages-widget', __('Subpages Extended', 'subpages-extended'), $widget_ops);
-		$this->alt_option_name = 'widget_shailan_subpages';
-		
-		if ( is_active_widget(false, false, $this->id_base) )
-			add_action( 'wp_head', array(&$this, 'styles') );	
-
-		$this->sort_options = array(
-			'Post Title' => 'post_title',
-			'Menu Order' => 'menu_order, post_title',
-			'Date' => 'post_date',
-			'Last Modified' => 'post_modified',
-			'Page ID' => 'ID',
-			'Page Author' => 'post_author',
-			'Page Slug' => 'post_name'
-		);
-			
-		$this->widget_defaults = array(
-			'title' => '',
-			'exclude' => '',
-			'depth' => -1,
-			'use_parent_title' => false,
-			'exceptme' => false,
-			'childof' => '',
-			'sort_by' => 'menu_order, post_title',
-			'use_menu_labels' => false,
-			'link_on_title' => false
-		);
-    }
- */
-
     //
     //  @see WP_Widget::widget
     //
