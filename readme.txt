@@ -5,10 +5,10 @@ Requires at least: 2.8
 Tested up to: 3.0.4
 Stable tag: 1.0.0
 
-Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13 (for more info, see [International Standard Book Number](http://en.wikipedia.org/wiki/International_Standard_Book_Number)).
+Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
 
 == Description ==
-Supplying an ISBN (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://http://books.google.com/).
+Supplying an [ISBN](http://en.wikipedia.org/wiki/International_Standard_Book_Number) (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://http://books.google.com/).
 
 Using the Widget you can choose whether to:
 
