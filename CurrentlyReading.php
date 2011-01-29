@@ -4,7 +4,7 @@
     Plugin URI: http://www.damn.org.za/blog/CurrentlyReading
     Description: Display a Currently Reading widget using an image from (and linking to) the Google Books Website
     Author: Eugéne Roux
-    Version: 3
+    Version: 3.1
     Author URI: http://damn.org.za/
  */
 
@@ -18,6 +18,7 @@ class CurrentlyReading extends WP_Widget {
         $this->WP_Widget( 'reading', __( 'Reading', 'reading_widget' ), $widget_ops );
         $this->widget_defaults = array(
             'internalcss' => true,
+            'boxshadow' => true,
         );
     }
 
@@ -31,6 +32,7 @@ class CurrentlyReading extends WP_Widget {
 
         $title = apply_filters('widget_title', $instance['title']);
         $internalcss = $instance["internalcss"] ? true : false;
+        $boxshadow = $instance["boxshadow"] ? true : false;
 
         if ($instance['isbn'] != "") {      // No point in a "Currently Reading" if you aren't, is there?
 
@@ -42,17 +44,25 @@ class CurrentlyReading extends WP_Widget {
             $spacechars = array(' ', '-', '_');
             $myisbn = str_replace($spacechars, "", $instance['isbn']);
 
-            print "  <!-- ISBN: " . $instance['isbn'] . " -->\n";
-            if ( $internalcss ) {
-                print "  <ul style='list-style: none'>\n";
+            print("\n\t<!-- ISBN: " . $instance['isbn'] . " -->\n");
+            if ( $internalcss || $boxshadow ) {
+                print("\t\t<ul style='margin: 1em;");
+                if ( $internalcss ) {
+                    print(" list-style: none;");
+                }
+                print("'>\n");
             } else {
-                print "  <ul>\n";
+                print("\t\t<ul>\n");
             }
-            print"    <li>\n";
-            print "      <a href='http://books.google.com/books?vid=ISBN$myisbn'>";
-            print "<img src='http://books.google.com/books?vid=ISBN$myisbn&printsec=frontcover&img=1&zoom=1' ";
-            print "alt='ISBN: " . $instance['isbn'] . "' title='ISBN: " . $instance['isbn'] . "'/></a>\n";
-            print "    </li>\n  </ul>\n";
+            print( "\t\t\t<li>\n");
+            print( "\t\t\t\t<a href='http://books.google.com/books?vid=ISBN$myisbn'>");
+            print( "<img " );
+            if ( $boxshadow ) {
+                print("style='-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; -khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px;' ");
+            }
+            print( "src='http://books.google.com/books?vid=ISBN$myisbn&printsec=frontcover&img=1&zoom=1' ");
+            print( "alt='ISBN: " . $instance['isbn'] . "' title='ISBN: " . $instance['isbn'] . "'/></a>\n");
+            print( "\t\t\t</li>\n\t\t</ul>\n");
 
             echo $after_widget;
         }
@@ -66,6 +76,7 @@ class CurrentlyReading extends WP_Widget {
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['isbn'] = strip_tags( $new_instance['isbn'] );
         $instance['internalcss'] = $new_instance['internalcss'] ? 1 : 0;
+        $instance['boxshadow'] = $new_instance['boxshadow'] ? 1 : 0;
         return $instance;
     }
 
@@ -79,6 +90,7 @@ class CurrentlyReading extends WP_Widget {
         $title = esc_attr( $instance['title'] );
         $isbn = esc_attr( $instance['isbn'] );
         $internalcss = $instance['internalcss'] ? "checked='checked'" : "";
+        $boxshadow = $instance['boxshadow'] ? "checked='checked'" : "";
 
         print( "\t<p>\n\t\t<label for='" . $this->get_field_id("title") . "'>" ); _e( "Title:" ); 
         print( "\n\t\t\t<input class='widefat' id='" . $this->get_field_id('title') . "' name='" );
@@ -89,9 +101,14 @@ class CurrentlyReading extends WP_Widget {
         print( "\n\t\t\t<input class='widefat' id='" . $this->get_field_id("isbn") . "' name='" );
         print( $this->get_field_name("isbn") . "' type='text' value='" . $isbn . "' />\n\t\t</label>\n\t</p>\n" );
 
-        print( "\t<p>\n\t\t<input class='checkbox' type='checkbox' " . $internalcss );
+        print( "\t<p>\n" );
+        print( "\t\t<input class='checkbox' type='checkbox' " . $internalcss );
         print( " id='" . $this->get_field_id("internalcss") . "' name='" . $this->get_field_name("internalcss") . "'/>\n" );
         print( "\t\t<label for='" . $this->get_field_id("internalcss") . "'>" ); _e( "Suppress List Marker" );
+        print( "\n\t\t<br />\n" );
+        print( "\t\t<input class='checkbox' type='checkbox' " . $boxshadow );
+        print( " id='" . $this->get_field_id("boxshadow") . "' name='" . $this->get_field_name("boxshadow") . "'/>\n" );
+        print( "\t\t<label for='" . $this->get_field_id("boxshadow") . "'>" ); _e( "Display a Box-Shadow" );
         print( "</label>\n\t</p>\n" );
 
     }
