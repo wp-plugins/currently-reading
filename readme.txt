@@ -21,12 +21,14 @@ as well as
 
 == Installation ==
 **Install**
+
 1. Unzip the `currently-reading.zip` file. 
 1. Upload `currently-reading.php` to the `/wp-content/plugins/` directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Use the "Currently Reading" widget.
 
 **Upgrade**
+
 1. Follow your normal installtion procedure
 1. Open each Widget's control panel and re-save
 
