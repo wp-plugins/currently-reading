@@ -3,7 +3,7 @@ Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
 Tested up to: 3.0.4
-Stable tag: 3.1
+Stable tag: 3.3
 
 Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
 
@@ -20,6 +20,7 @@ as well as
 1. Define the ISBN-10 or ISBN-13 of the book.
 
 == Installation ==
+
 **Install**
 
 1. Unzip the `currently-reading.zip` file. 
@@ -35,6 +36,7 @@ as well as
 == Frequently Asked Questions ==
 
 == Screenshots ==
+
 1. The Configuration of a "Currently Reading" section, with the "UL" marker suppressed.
 2. Multiple Widgets, the first marking them as "Recently Read".
 3. The previous configuration as rendered by Chrome.
@@ -42,13 +44,26 @@ as well as
 == Changelog ==
 
 = 1.0 =
+
 * Initial Public Release
 
 = 2.0 =
+
 * Fixed a potentially embarassing issue with generated HTML
 
 = 3.0 =
+
 * Release number re-alignment with internal Hg repo
 
 = 3.1 =
+
 * Added the ability to have drop-shadows around the front-cover images of the books
+
+= 3.2 =
+
+* Improved the book spacing a bit in the internal CSS
+
+= 3.3 =
+
+* Moved to a '<div>' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
+

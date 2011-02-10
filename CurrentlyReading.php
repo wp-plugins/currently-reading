@@ -4,7 +4,7 @@
     Plugin URI: http://www.damn.org.za/blog/CurrentlyReading
     Description: Display a Currently Reading widget using an image from (and linking to) the Google Books Website
     Author: Eugéne Roux
-    Version: 3.1
+    Version: 3.3
     Author URI: http://damn.org.za/
  */
 
@@ -45,24 +45,22 @@ class CurrentlyReading extends WP_Widget {
             $myisbn = str_replace($spacechars, "", $instance['isbn']);
 
             print("\n\t<!-- ISBN: " . $instance['isbn'] . " -->\n");
-            if ( $internalcss || $boxshadow ) {
-                print("\t\t<ul style='margin: 1em;");
-                if ( $internalcss ) {
-                    print(" list-style: none;");
-                }
-                print("'>\n");
-            } else {
-                print("\t\t<ul>\n");
+
+            print("\t\t<div");
+            if ( $internalcss ) {
+                print(" style='margin: 1em; padding: 2ex;'");
             }
-            print( "\t\t\t<li>\n");
-            print( "\t\t\t\t<a href='http://books.google.com/books?vid=ISBN$myisbn'>");
-            print( "<img " );
+            print( " class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "'>\n");
+
+            print( "\t\t\t<a href='http://books.google.com/books?vid=ISBN$myisbn'>");
+            print( "<img class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "-img' " );
             if ( $boxshadow ) {
-                print("style='-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; -khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px;' ");
+                print( "style='-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; " );
+                print( "-khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px;' " );
             }
             print( "src='http://books.google.com/books?vid=ISBN$myisbn&printsec=frontcover&img=1&zoom=1' ");
             print( "alt='ISBN: " . $instance['isbn'] . "' title='ISBN: " . $instance['isbn'] . "'/></a>\n");
-            print( "\t\t\t</li>\n\t\t</ul>\n");
+            print( "\t\t</div>\n");
 
             echo $after_widget;
         }
@@ -104,7 +102,7 @@ class CurrentlyReading extends WP_Widget {
         print( "\t<p>\n" );
         print( "\t\t<input class='checkbox' type='checkbox' " . $internalcss );
         print( " id='" . $this->get_field_id("internalcss") . "' name='" . $this->get_field_name("internalcss") . "'/>\n" );
-        print( "\t\t<label for='" . $this->get_field_id("internalcss") . "'>" ); _e( "Suppress List Marker" );
+        print( "\t\t<label for='" . $this->get_field_id("internalcss") . "'>" ); _e( "Pad the Image" );
         print( "\n\t\t<br />\n" );
         print( "\t\t<input class='checkbox' type='checkbox' " . $boxshadow );
         print( " id='" . $this->get_field_id("boxshadow") . "' name='" . $this->get_field_name("boxshadow") . "'/>\n" );
