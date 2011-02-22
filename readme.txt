@@ -65,5 +65,5 @@ as well as
 
 = 3.3 =
 
-* Moved to a '<div>' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
+* Moved to a '&lt;div&gt;' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
 

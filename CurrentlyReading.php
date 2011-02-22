@@ -1,7 +1,7 @@
 <?php
 /*
     Plugin Name: Currently Reading
-    Plugin URI: http://www.damn.org.za/blog/CurrentlyReading
+    Plugin URI: http://www.damn.org.za/blog/currentlyreading
     Description: Display a Currently Reading widget using an image from (and linking to) the Google Books Website
     Author: Eugéne Roux
     Version: 3.3
