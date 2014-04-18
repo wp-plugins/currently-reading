@@ -1,10 +1,10 @@
 <?php
 /*
     Plugin Name: Currently Reading
-    Plugin URI: http://www.damn.org.za/blog/currentlyreading
+    Plugin URI: http://blog.damn.org.za/widgets/
     Description: Display a Currently Reading widget using an image from (and linking to) the Google Books Website
     Author: Eugéne Roux
-    Version: 3.3
+    Version: 3.4
     Author URI: http://damn.org.za/
  */
 
@@ -25,7 +25,7 @@ class CurrentlyReading extends WP_Widget {
     //
     //  @see WP_Widget::widget
     //
-    function widget($args, $instance) {		
+    function widget($args, $instance) {
         $args = wp_parse_args( $args, $this->widget_defaults );
         extract( $args );
 		//$widget_options = wp_parse_args( $instance, $this->widget_defaults );
@@ -69,7 +69,7 @@ class CurrentlyReading extends WP_Widget {
     //
     //  @see WP_Widget::update
     //
-    function update($new_instance, $old_instance) {				
+    function update($new_instance, $old_instance) {
         $instance = $old_instance;
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['isbn'] = strip_tags( $new_instance['isbn'] );
@@ -90,7 +90,7 @@ class CurrentlyReading extends WP_Widget {
         $internalcss = $instance['internalcss'] ? "checked='checked'" : "";
         $boxshadow = $instance['boxshadow'] ? "checked='checked'" : "";
 
-        print( "\t<p>\n\t\t<label for='" . $this->get_field_id("title") . "'>" ); _e( "Title:" ); 
+        print( "\t<p>\n\t\t<label for='" . $this->get_field_id("title") . "'>" ); _e( "Title:" );
         print( "\n\t\t\t<input class='widefat' id='" . $this->get_field_id('title') . "' name='" );
         print( $this->get_field_name('title') . "' type='text' value='" . $title );
         print( "' />\n\t\t</label>\n\t\t<em>Leave blank for no title</em>\n\t</p>\n" );
