@@ -17,21 +17,26 @@ Using the Widget you can choose whether to:
 as well as
 
 1. Decide whether you would like to use a Title
-1. Define the ISBN-10 or ISBN-13 of the book.
+2. Define the ISBN-10 or ISBN-13 of the book.
 
 == Installation ==
 
 **Install**
 
-1. Unzip the `currently-reading.zip` file. 
-1. Upload `currently-reading.php` to the `/wp-content/plugins/` directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Use the "Currently Reading" widget.
+1. Unzip the `currently-reading.zip` file.
+2. Upload `currently-reading.php` to the `/wp-content/plugins/` directory.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
+4. Use the "Currently Reading" widget.
 
 **Upgrade**
 
-1. Follow your normal installtion procedure
-1. Open each Widget's control panel and re-save
+1. Follow your normal installation procedure
+2. Open each Widget's control panel and re-save
+
+**Use the WordPress Plug-in System**
+
+1. Select "Upgrade and Activate"
+2. Congratulate yourself on a sterling job.
 
 == Frequently Asked Questions ==
 
@@ -49,7 +54,7 @@ as well as
 
 = 2.0 =
 
-* Fixed a potentially embarassing issue with generated HTML
+* Fixed a potentially embarrassing issue with generated HTML
 
 = 3.0 =
 
@@ -66,4 +71,3 @@ as well as
 = 3.3 =
 
 * Moved to a '&lt;div&gt;' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
-
