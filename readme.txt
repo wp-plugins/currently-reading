@@ -2,8 +2,8 @@
 Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
-Tested up to: 3.0.4
-Stable tag: 3.3
+Tested up to: 3.9
+Stable tag: trunk
 
 Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
 
