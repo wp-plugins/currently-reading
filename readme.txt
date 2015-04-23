@@ -2,7 +2,7 @@
 Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
-Tested up to: 4.0
+Tested up to: 4.2
 Stable tag: trunk
 
 Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
@@ -26,7 +26,7 @@ as well as
 1. Unzip the `currently-reading.zip` file.
 2. Upload `currently-reading.php` to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
-4. Use the "Currently Reading" widget.
+4. Use the "Currently Reading" widget (found under Appearance -> Widgets).
 
 **Upgrade**
 

@@ -25,7 +25,7 @@ class CurrentlyReading extends WP_Widget {
     //
     //  @see WP_Widget::widget
     //
-    function widget($args, $instance) {
+    function widget( $args, $instance ) {
         $args = wp_parse_args( $args, $this->widget_defaults );
         extract( $args );
 		//$widget_options = wp_parse_args( $instance, $this->widget_defaults );
@@ -34,7 +34,7 @@ class CurrentlyReading extends WP_Widget {
         $internalcss = $instance["internalcss"] ? true : false;
         $boxshadow = $instance["boxshadow"] ? true : false;
 
-        if ($instance['isbn'] != "") {      // No point in a "Currently Reading" if you aren't, is there?
+        if ( $instance['isbn'] != "" ) {      // No point in a "Currently Reading" if you aren't, is there?
 
             echo $before_widget;
 
@@ -69,7 +69,7 @@ class CurrentlyReading extends WP_Widget {
     //
     //  @see WP_Widget::update
     //
-    function update($new_instance, $old_instance) {
+    function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
         $instance['title'] = strip_tags( $new_instance['title'] );
         $instance['isbn'] = strip_tags( $new_instance['isbn'] );
