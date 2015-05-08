@@ -343,9 +343,4 @@ class CurrentlyReading extends WP_Widget {
 //	register CurrentlyReading widget
 //
 add_action( 'widgets_init', create_function( '', 'return register_widget( "CurrentlyReading" );' ));
-add_action( 'admin_menu', 'currently_reading_menu' );
-
-function currently_reading_menu() {
-	add_options_page( 'Currently Reading', 'Currently Reading', 'manage_options', "CurrentlyReading.php", "CurrentlyReading->form" );
-}
 ?>

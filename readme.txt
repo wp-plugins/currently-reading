@@ -8,25 +8,33 @@ Stable tag: trunk
 Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
 
 == Description ==
-Supplying an [ISBN](http://en.wikipedia.org/wiki/International_Standard_Book_Number) (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://http://books.google.com/) using the Google Books API.
+Supplying an [ISBN](http://en.wikipedia.org/wiki/International_Standard_Book_Number) (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://books.google.co.za/) using the Google Books API.
 
 Using the Widget you can choose whether to:
 
-* Suppress the List Marker (selected by default, uses internal CSS)
+* Pad the Image (selected by default, uses internal CSS)
+* Display a Box-Shadow (selected by default, uses internal CSS)
+* Choose Alternate Google Country (defaults to "South Africa" since books.google.com seems to give a "500" error and South Africa seems to work just fine for US clients as well)
 
 as well as
 
-1. Decide whether you would like to use a Title
-2. Define the ISBN-10 or ISBN-13 of the book.
+* Decide whether you would like to use a Title
+* Define the ISBN-10 or ISBN-13 of the book.
 
 == Installation ==
 
-**Install**
+**Manual Install**
 
 1. Unzip the `currently-reading.zip` file.
 2. Upload `currently-reading.php` to the `/wp-content/plugins/` directory.
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 4. Use the "Currently Reading" widget (found under Appearance -> Widgets).
+
+**Automated Install**
+
+1. Go to "Plugins" -> "Add New" in your Control Panel.
+2. Search for the keywords "Currently Reading".
+3. Click the "Install Now" button on "Currently Reading" by "Eugéne Roux".
 
 **Upgrade**
 
@@ -40,6 +48,18 @@ as well as
 
 == Frequently Asked Questions ==
 
+**Are you planing to insert other sources than Google Books to the Currently Reading widget?**
+
+I'll have a look into supporting Amazon, though they do make you jump through hoops to use their API (which is the reason I settled on using Google Books to start with).
+
+**Is there a way to get this plugin to do a library of all of your books into WordPress?**
+
+It's not currently possible with this plugin, no.
+
+I'll give it a bit of thought and see if I can extend it to do that; but it will most likely need the creation of an alternate plugin to do that.
+
+This would likely require its own database table to do properly, as well...
+
 == Screenshots ==
 
 1. The Configuration of a "Currently Reading" section, with the "UL" marker suppressed.
@@ -49,37 +69,37 @@ as well as
 
 == Changelog ==
 
-= 1.0 =
-
-* Initial Public Release
-
-= 2.0 =
-
-* Fixed a potentially embarrassing issue with generated HTML
-
-= 3.0 =
-
-* Release number re-alignment with internal Hg repo
-
-= 3.1 =
-
-* Added the ability to have drop-shadows around the front-cover images of the books
-
-= 3.2 =
-
-* Improved the book spacing a bit in the internal CSS
-
-= 3.3 =
-
-* Moved to a '&lt;div&gt;' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
-
-= 3.4 =
-
-* Minor fixes to ensure WordPress compatibility
-
 = 4.0 =
 
 * Use the Google Books API instead of previous deep-linking
 * Fix display of ISBN when updating the widget
 * Allow the selection of Alternate Google Domains (books.google.com causes issues in some countries)
 * Display book's Title instead of ISBN on mouse-over
+
+= 3.4 =
+
+* Minor fixes to ensure WordPress compatibility
+
+= 3.3 =
+
+* Moved to a '&lt;div&gt;' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
+
+= 3.2 =
+
+* Improved the book spacing a bit in the internal CSS
+
+= 3.1 =
+
+* Added the ability to have drop-shadows around the front-cover images of the books
+
+= 3.0 =
+
+* Release number re-alignment with internal Hg repo
+
+= 2.0 =
+
+* Fixed a potentially embarrassing issue with generated HTML
+
+= 1.0 =
+
+* Initial Public Release
