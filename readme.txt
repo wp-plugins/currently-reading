@@ -2,13 +2,13 @@
 Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
 Requires at least: 2.8
-Tested up to: 4.2
+Tested up to: 4.2.2
 Stable tag: trunk
 
 Displays a cover image of a book with a link to Google Books based on a supplied ISBN-10 or ISBN-13.
 
 == Description ==
-Supplying an [ISBN](http://en.wikipedia.org/wiki/International_Standard_Book_Number) (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://http://books.google.com/).
+Supplying an [ISBN](http://en.wikipedia.org/wiki/International_Standard_Book_Number) (and, optionally, a Title) will display a cover image of the relevant book with a link to that book's page on [Google Books](http://http://books.google.com/) using the Google Books API.
 
 Using the Widget you can choose whether to:
 
@@ -43,8 +43,9 @@ as well as
 == Screenshots ==
 
 1. The Configuration of a "Currently Reading" section, with the "UL" marker suppressed.
-2. Multiple Widgets, the first marking them as "Recently Read".
-3. The previous configuration as rendered by Chrome.
+2. Multiple Widgets, the first marking them as "Finished Reading".
+3. The previous configuration as rendered by Safari.
+4. The difference between Padding and Box-Shadow Enabled and Disabled.
 
 == Changelog ==
 
@@ -71,3 +72,14 @@ as well as
 = 3.3 =
 
 * Moved to a '&lt;div&gt;' based layout instead of using Lists (Kudos to James Sumners for the suggestion)
+
+= 3.4 =
+
+* Minor fixes to ensure WordPress compatibility
+
+= 4.0 =
+
+* Use the Google Books API instead of previous deep-linking
+* Fix display of ISBN when updating the widget
+* Allow the selection of Alternate Google Domains (books.google.com causes issues in some countries)
+* Display book's Title instead of ISBN on mouse-over
