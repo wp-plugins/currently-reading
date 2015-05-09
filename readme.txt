@@ -62,12 +62,19 @@ This would likely require its own database table to do properly, as well...
 
 == Screenshots ==
 
-1. The Configuration of a "Currently Reading" section, with the "UL" marker suppressed.
+1. The Configuration of a "Currently Reading" section, with Padding enabled.
 2. Multiple Widgets, the first marking them as "Finished Reading".
 3. The previous configuration as rendered by Safari.
 4. The difference between Padding and Box-Shadow Enabled and Disabled.
+5. Widget Configuration location in the Dashboard's sidebar.
 
 == Changelog ==
+
+= 4.0.1 =
+
+* Display a message (No Google Books Entry Found for ISBN) when Google has no entry for the book in question
+* Reduce the width of margins so that the book entries fit better into the sidebar
+* Added a screenshot of the Widget Configuration location in the Sidebar (mostly since I keep forgetting where it is)
 
 = 4.0 =
 

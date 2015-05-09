@@ -4,7 +4,7 @@
 	Plugin URI: http://blog.damn.org.za/widgets/
 	Description: Display a Currently Reading widget using the Google Books API
 	Author: Eugéne Roux
-	Version: 4.0
+	Version: 4.0.1
 	Author URI: http://damn.org.za/
  */
 
@@ -41,38 +41,48 @@ class CurrentlyReading extends WP_Widget {
 			$myisbn = str_replace( $spacechars, "", $instance[ 'isbn' ]);
 			$isbnjson = json_decode( file_get_contents( "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $myisbn ), true );
 
+			echo $before_widget;
+
+			if ( $title )
+				echo $before_title . $title . $after_title; // This way we get to choose a "No Title" scenario...
+
 			if ( $isbnjson[ "totalItems" ] > 0 ) {
-
-				echo $before_widget;
-
-				if ( $title )
-					echo $before_title . $title . $after_title; // This way we get to choose a "No Title" scenario...
-
 
 				print("\n\t<!-- ISBN: " . $myisbn . " / Title: " . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'title' ] . " -->\n");
 
 				print( "\t\t<div" );
-				if ( $internalcss ) {
-					print( " style='margin: 1em; padding: 2ex;'" );
-				}
+
+				if ( $internalcss )
+					print( " style='padding: 1em 1em 0;'" );		// print( " style='margin: 1em; padding: 2ex;'" );
+
 				print( " class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "'>\n");
 
 				$googlelink = $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'canonicalVolumeLink' ];
-				print("\n\t<!-- Google Link: " . $googlelink . " -->\n");
+				print("\n\t<!-- Google Canonical Volume Link: " . $googlelink . " -->\n");
 
 				print( "\t\t\t<a href='" . str_replace( "google.com", $localdomain, $googlelink ) . "'>");
 				print( "<img class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "-img' " );
+
 				if ( $boxshadow ) {
 					print( "style='-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; " );
 					print( "-khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px;' " );
 				}
+
 				print( "src='"   . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'imageLinks' ][ 'thumbnail' ] 	. "' " );
 				print( "alt='"   . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'title' ]						. "' ");
 				print( "title='" . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'title' ]						. "'/></a>\n");
 				print( "\t\t</div>\n");
 
-				echo $after_widget;
+			} else {
+
+				print( "\n\t<!-- ISBN: " . $myisbn . " / No Google Books Entry Found -->\n");
+				print( "\n\t<div class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "'" );
+				if ( $internalcss )
+					print( " style='padding: 1em 1em 0 1em;'" );
+				print( ">No Google Books Entry Found for ISBN: <em>" . $myisbn . "</em></div>\n");
 			}
+
+			echo $after_widget;
 		}
 	}
 
