@@ -4,7 +4,7 @@
 	Plugin URI: http://blog.damn.org.za/widgets/
 	Description: Display a Currently Reading widget using the Google Books API
 	Author: Eugéne Roux
-	Version: 4.0.1
+	Version: 4.0.2
 	Author URI: http://damn.org.za/
  */
 
@@ -17,8 +17,9 @@ class CurrentlyReading extends WP_Widget {
 		$this->WP_Widget( 'reading', __( 'Reading', 'reading_widget' ), $widget_ops );
 		$this->widget_defaults = [
 			'internalcss' => true,
-			'boxshadow' => true,
-			'domain' => 'google.co.za',
+			'boxshadow'   => true,
+			'booksapi'    => false,
+			'domain'      => 'google.com',
 		];
 	}
 
@@ -33,20 +34,28 @@ class CurrentlyReading extends WP_Widget {
 		$title = apply_filters( 'widget_title', $instance[ 'title' ]);
 		$internalcss = $instance[ "internalcss" ] ? true : false;
 		$boxshadow   = $instance[ "boxshadow" ]   ? true : false;
-		$localdomain = $instance[ "domain" ]      ? $instance[ "domain" ] : "google.co.za";
+		$booksapi    = $instance[ "booksapi" ]    ? true : false;
+		$localdomain = $instance[ "domain" ]      ? $instance[ "domain" ] : "google.com";
 
 		if ( $instance['isbn'] != "" ) {	  // No point in a "Currently Reading" if you aren't, is there?
 
 			$spacechars = array( ' ', '-', '_' );
 			$myisbn = str_replace( $spacechars, "", $instance[ 'isbn' ]);
-			$isbnjson = json_decode( file_get_contents( "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $myisbn ), true );
 
 			echo $before_widget;
-
 			if ( $title )
 				echo $before_title . $title . $after_title; // This way we get to choose a "No Title" scenario...
 
-			if ( $isbnjson[ "totalItems" ] > 0 ) {
+			if ( $booksapi == true ) {
+				try {
+					$isbnjson = json_decode( file_get_contents( "https://www.googleapis.com/books/v1/volumes?q=isbn:" . $myisbn ), true );
+				} catch (Exception $e) {
+					$booksapi = false;
+					print("\n\t<!-- Google Books API Check Failed - Disabled -->\n");
+				}
+			}
+
+			if ( $booksapi == true and $isbnjson[ "totalItems" ] > 0 ) {
 
 				print("\n\t<!-- ISBN: " . $myisbn . " / Title: " . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'title' ] . " -->\n");
 
@@ -73,13 +82,39 @@ class CurrentlyReading extends WP_Widget {
 				print( "title='" . $isbnjson[ 'items' ][0][ 'volumeInfo' ][ 'title' ]						. "'/></a>\n");
 				print( "\t\t</div>\n");
 
-			} else {
+			} else if ( $booksapi == true and $isbnjson[ "totalItems" ] == 0 ) {
 
 				print( "\n\t<!-- ISBN: " . $myisbn . " / No Google Books Entry Found -->\n");
 				print( "\n\t<div class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "'" );
 				if ( $internalcss )
 					print( " style='padding: 1em 1em 0 1em;'" );
 				print( ">No Google Books Entry Found for ISBN: <em>" . $myisbn . "</em></div>\n");
+
+			} else {
+
+				print("\n\t<!-- ISBN: " . $myisbn . " [Direct Link into Google Domain] -->\n");
+
+				print( "\t\t<div" );
+
+				if ( $internalcss )
+					print( " style='padding: 1em 1em 0;'" );		// print( " style='margin: 1em; padding: 2ex;'" );
+
+				print( " class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "'>\n");
+
+				print( "\n\t<!-- ISBN: " . $myisbn . " / Google Books API Disabled -->\n");
+
+				print( "\t\t\t<a href='http://books." . $localdomain . "/books?vid=ISBN$myisbn'>");
+				print( "<img class='currentlyreading' id='currenlyreading-ISBN" . $myisbn . "-img' " );
+
+				if ( $boxshadow ) {
+					print( "style='-moz-box-shadow: #CCC 5px 5px 5px; -webkit-box-shadow: #CCC 5px 5px 5px; " );
+					print( "-khtml-box-shadow: #CCC 5px 5px 5px; box-shadow: #CCC 5px 5px 5px;' " );
+				}
+
+				print( "src='http://books." . $localdomain . "/books?vid=ISBN$myisbn&printsec=frontcover&img=1&zoom=1' ");
+				print( "alt='ISBN: " . $instance['isbn'] . "' title='ISBN: " . $instance['isbn'] . "'/></a>\n");
+
+				print( "\t\t</div>\n");
 			}
 
 			echo $after_widget;
@@ -95,7 +130,8 @@ class CurrentlyReading extends WP_Widget {
 		$instance[ 'isbn' ]			= strip_tags( $new_instance[ 'isbn' ]);
 		$instance[ 'internalcss' ]	= $new_instance[ 'internalcss' ] ? 1 : 0;
 		$instance[ 'boxshadow' ]	= $new_instance[ 'boxshadow'   ] ? 1 : 0;
-		$instance[ "domain" ]		= $new_instance[ "domain" ]      ? $new_instance[ "domain" ] : "google.co.za";
+		$instance[ 'booksapi' ] 	= $new_instance[ 'booksapi' ]    ? 1 : 0;
+		$instance[ "domain" ]		= $new_instance[ "domain" ]      ? $new_instance[ "domain" ] : "google.com";
 		return $instance;
 	}
 
@@ -110,6 +146,7 @@ class CurrentlyReading extends WP_Widget {
 		$isbn        = esc_attr( strip_tags( $instance[ 'isbn' ]));
 		$internalcss = $instance[ 'internalcss' ] ? "checked='checked'" : "";
 		$boxshadow   = $instance[ 'boxshadow' ]   ? "checked='checked'" : "";
+		$booksapi    = $instance[ 'booksapi' ] 	  ? "checked='checked'" : "";
 		$activedom   = $instance[ 'domain' ];
 
 		$googledomains = [
@@ -326,12 +363,19 @@ class CurrentlyReading extends WP_Widget {
 		print( $this->get_field_name( "isbn" ) . "' type='text' value='" . $isbn . "' />\n\t\t</label>\n\t</p>\n" );
 
 		print( "\t<p>\n" );
+		print( "\t\t<input class='checkbox' type='checkbox' " . $booksapi );
+		print( " id='" . $this->get_field_id( "booksapi" ) . "' name='" . $this->get_field_name( "booksapi" ) . "'/>\n" );
+		print( "\t\t<label for='" . $this->get_field_id( "booksapi" ) . "'>" ); _e( "Use Google Books API" );
+		print( "</label>\n\t</p>\n" );
+
 		print( "\t\t<input class='checkbox' type='checkbox' " . $internalcss );
 		print( " id='" . $this->get_field_id( "internalcss" ) . "' name='" . $this->get_field_name( "internalcss" ) . "'/>\n" );
 		print( "\t\t<label for='" . $this->get_field_id( "internalcss" ) . "'>" ); _e( "Pad the Image" );
-		print( "\n\t\t<br />\n" );
+		print( "</label>\n\t</p>\n" );
+
 		print( "\t\t<input class='checkbox' type='checkbox' " . $boxshadow );
 		print( " id='" . $this->get_field_id( "boxshadow" ) . "' name='" . $this->get_field_name( "boxshadow" ) . "'/>\n" );
+
 		print( "\t\t<label for='" . $this->get_field_id( "boxshadow" ) . "'>" ); _e( "Display a Box-Shadow" );
 		print( "</label>\n\t</p>\n" );
 

@@ -1,7 +1,7 @@
 === Currently Reading ===
 Contributors: eroux
 Tags: books, read, reading, admin, administration, jadb
-Requires at least: 2.8
+Requires at least: 3
 Tested up to: 4.2.2
 Stable tag: trunk
 
@@ -48,6 +48,20 @@ as well as
 
 == Frequently Asked Questions ==
 
+**I get a '*Warning: file_get_contents ... : failed to open stream: HTTP request failed! HTTP/1.0 403 Forbidden*' Error in my logs and no books are displayed. Why is this happening?**
+
+Your web-site has been configure not to allow outgoing HTTP requests and you have 'Use Google API' enabled.
+
+Please de-select the 'Use Google API' option to use the direct connection instead.
+
+**I get a '*No Google Books Entry Found for ISBN:NUMBER*' on my Blog... Why?**
+
+Sometimes Google Books does not return any valid responses on ISBNs. Try the following:
+
+1. See if you can find an alternate ISBN for the book
+2. Toggle the "Use Google API" option
+3. Find the eBook on Google's Books Web Page and use its ISBN
+
 **Are you planing to insert other sources than Google Books to the Currently Reading widget?**
 
 I'll have a look into supporting Amazon, though they do make you jump through hoops to use their API (which is the reason I settled on using Google Books to start with).
@@ -69,6 +83,11 @@ This would likely require its own database table to do properly, as well...
 5. Widget Configuration location in the Dashboard's sidebar.
 
 == Changelog ==
+
+= 4.0.2 =
+
+* Allow (and default to) *not* using the Google Books API in preference to the older -- direct -- connection
+* Since I'm probably the only Saffer using this, default to "books.google.com"
 
 = 4.0.1 =
 
