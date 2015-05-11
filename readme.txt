@@ -48,13 +48,13 @@ as well as
 
 == Frequently Asked Questions ==
 
-**I get a '*Warning: file_get_contents ... : failed to open stream: HTTP request failed! HTTP/1.0 403 Forbidden*' Error in my logs and no books are displayed. Why is this happening?**
+**I Get a '*Warning: file_get_contents ... : failed to open stream: HTTP request failed! HTTP/1.0 403 Forbidden*' Error on My Blog With No Books Displayed. Why Is This Happening?**
 
-Your web-site has been configure not to allow outgoing HTTP requests and you have 'Use Google API' enabled.
+Your web-site has been configure not to allow outgoing HTTP requests and you have 'Use Google API' enabled or Google rejected your connection.
 
-Please de-select the 'Use Google API' option to use the direct connection instead.
+If the automated fail-back failed, please de-select the 'Use Google API' option to use the direct connection instead nd report this as a bug.
 
-**I get a '*No Google Books Entry Found for ISBN:NUMBER*' on my Blog... Why?**
+**I Get a '*No Google Books Entry Found for ISBN:NUMBER*' on My Blog... Why?**
 
 Sometimes Google Books does not return any valid responses on ISBNs. Try the following:
 
@@ -62,13 +62,19 @@ Sometimes Google Books does not return any valid responses on ISBNs. Try the fol
 2. Toggle the "Use Google API" option
 3. Find the eBook on Google's Books Web Page and use its ISBN
 
-**Are you planing to insert other sources than Google Books to the Currently Reading widget?**
+**I Get an *Image Not Available* Image on My Blog Instead of the Book Cover, and Clicking It Gives Me a Google 404 Error**
+
+You will only see this if you are *not* using the Google Books API or the if you are and it failed back to the previous system for some reason.
+
+Double-check the ISBN you used; it's either wrong or Google does not have an entry for the book referenced.
+
+**Are You Planning to Insert Other Sources Than Google Books to the Currently Reading Widget?**
 
 I'll have a look into supporting Amazon, though they do make you jump through hoops to use their API (which is the reason I settled on using Google Books to start with).
 
-**Is there a way to get this plugin to do a library of all of your books into WordPress?**
+**Is There a Way to Get This Plug-In to Do a Library of All of Your Books Into WordPress?**
 
-It's not currently possible with this plugin, no.
+It's not currently possible with this plug-in, no.
 
 I'll give it a bit of thought and see if I can extend it to do that; but it will most likely need the creation of an alternate plugin to do that.
 
@@ -84,9 +90,15 @@ This would likely require its own database table to do properly, as well...
 
 == Changelog ==
 
+= 4.0.3 =
+
+* Allow the centring of the Book Cover within the sidebar (Props Andy Tegala for the suggestion)
+* Cache Google Books API call (if successful) for (default) 30 days
+* (Semi-)Gently fall back to previous behaviour if Google Books API call fails
+
 = 4.0.2 =
 
-* Allow (and default to) *not* using the Google Books API in preference to the older -- direct -- connection
+* Allow *not* using the Google Books API in preference to the older -- direct -- connection
 * Since I'm probably the only Saffer using this, default to "books.google.com"
 
 = 4.0.1 =
