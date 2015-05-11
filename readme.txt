@@ -64,7 +64,7 @@ Sometimes Google Books does not return any valid responses on ISBNs. Try the fol
 
 **I Get an *Image Not Available* Image on My Blog Instead of the Book Cover, and Clicking It Gives Me a Google 404 Error**
 
-You will only see this if you are *not* using the Google Books API or the if you are and it failed back to the previous system for some reason.
+You will only see this if you are *not* using the Google Books API or, if you are, it failed back to the previous system for some reason.
 
 Double-check the ISBN you used; it's either wrong or Google does not have an entry for the book referenced.
 
